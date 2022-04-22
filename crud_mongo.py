@@ -1,3 +1,4 @@
+from typing import Awaitable
 from models import RequestBook, ResponseBook
 from config import database
 import uuid
@@ -21,3 +22,21 @@ class BookCRUD():
             "description": book.get("description","-sin-descripción-")
         }
         await database.get_colletion('book').insert_on(book)
+
+
+    @staticmethod
+    async def update(id:str, book:RequestBook):
+        _book = await database.get_collection("book").find_one({"id":id})
+        _book["title"] = book.get("title","-sin-titulo")
+        _book["description"] = book.get("description","-sin-descripción-")
+        await database.get_collection("book").update_one({"id":id},{"$set":_book})
+    
+    
+    @staticmethod
+    async def get_id(id:str):
+        return await database.get_collection("book").find_one({"_id":id})
+    
+    
+    @staticmethod
+    async def delete(id:str):
+        await database.get_collection("book").delete_one({"_id":id})
