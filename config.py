@@ -7,4 +7,4 @@ MONGODB_URL = "mongodb://root:example@localhost:27017/"
 client = motor.motor_asyncio.AsyncIOMotorClient(MONGODB_URL)
 
 # Conección a la base de datos "db"
-database = client.db
+database = client["books"]

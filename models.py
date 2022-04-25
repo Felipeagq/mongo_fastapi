@@ -14,4 +14,4 @@ class ResponseBook(BaseModel):
     code: str
     status: str
     message: str
-    Result: Optional[T] = None
+    result: Optional[T] = None
