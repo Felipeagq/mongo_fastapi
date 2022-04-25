@@ -1,4 +1,3 @@
-from unittest import result
 from fastapi import APIRouter
 from crud_mongo import BookCRUD
 from models import RequestBook,ResponseBook
