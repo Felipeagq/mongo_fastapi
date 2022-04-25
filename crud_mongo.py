@@ -27,10 +27,13 @@ class BookCRUD():
 
     @staticmethod
     async def update(id:str, book:RequestBook):
-        _book = await database["booka"].find_one({"id":id})
-        _book["title"] = book.get("title","-sin-titulo")
-        _book["description"] = book.get("description","-sin-descripción-")
-        await database["booka"].update_one({"id":id},{"$set":_book})
+        _book = await database["booka"].find_one({"_id":id})
+        print(_book)
+        print(book)
+        _book["title"] = book.title
+        _book["description"] = book.description
+        await database["booka"].update_one({"_id":id},{"$set":_book})
+        return _book
     
     
     @staticmethod
@@ -40,4 +43,6 @@ class BookCRUD():
     
     @staticmethod
     async def delete(id:str):
-        await database["booka"].delete_one({"_id":id})
+        _book = await database["booka"].delete_one({"_id":id})
+        print(str(_book))
+        return _book

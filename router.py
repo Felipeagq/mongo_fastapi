@@ -32,9 +32,9 @@ async def create_book(book: RequestBook):
     result=book).dict(exclude_none=True)
 
 
-@router.put("/book/update")
-async def update_book(book: RequestBook):
-    _book = await BookCRUD.update(book)
+@router.put("/book/update/{id}")
+async def update_book(id:str, book: RequestBook):
+    _book = await BookCRUD.update(id,book)
     return ResponseBook(code=200,
     status="ok",
     message="Success update",
@@ -47,4 +47,4 @@ async def delete_book(id:str):
     return ResponseBook(code=200,
     status="ok",
     message="Success deleted",
-    result=_book).dict(exclude_none=True)
+    result=str(_book)).dict(exclude_none=True)
